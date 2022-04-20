@@ -7,7 +7,7 @@ const notion = new Client({
     auth: NOTION_KEY,
 });
 
-export async function onRequestGet(context) {
+export async function onRequest(context) {
     // Contents of context object
     try {
         const response = await notion.databases.query({
