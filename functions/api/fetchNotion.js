@@ -1,33 +1,13 @@
-const { Client } = require('@notionhq/client');
-
-const { NOTION_KEY, NOTION_DB } = process.env;
-
-// Initializing a client
-const notion = new Client({
-    auth: NOTION_KEY,
-});
-
 export async function onRequest(context) {
     // Contents of context object
-    try {
-        const response = await notion.databases.query({
-            database_id: NOTION_DB,
-            filter: {
-                property: 'Status',
-                select: {
-                    equals: 'Live',
-                },
-            },
-        });
-        return {
-            statusCode: 200,
-            body: JSON.stringify(response),
-        };
-    } catch (e) {
-        console.error(e);
-        return {
-            statusCode: 500,
-            body: e.toString(),
-        };
-    }
-};
+    const {
+      request, // same as existing Worker API
+      env, // same as existing Worker API
+      params, // if filename includes [id] or [[path]]
+      waitUntil, // same as ctx.waitUntil in existing Worker API
+      next, // used for middleware or to fetch assets
+      data, // arbitrary space for passing data between middlewares
+    } = context;
+  
+    return new Response('Hello, world!');
+  }
